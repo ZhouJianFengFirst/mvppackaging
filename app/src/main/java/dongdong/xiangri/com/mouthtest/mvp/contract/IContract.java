@@ -26,7 +26,6 @@ public interface IContract {
          */
         V getView();
 
-
         /**
          * 销毁动作
          */
@@ -35,5 +34,6 @@ public interface IContract {
 
      interface View {
         void showToast(String info);
+        void errorRequest(String msg);
     }
 }

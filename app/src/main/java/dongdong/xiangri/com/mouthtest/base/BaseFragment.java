@@ -8,7 +8,7 @@ import dongdong.xiangri.com.mouthtest.mvp.contract.IContract;
 import dongdong.xiangri.com.mouthtest.mvp.persenter.BasePersenter;
 
 public abstract class BaseFragment<M extends IContract.Model, V extends IContract.View, P extends BasePersenter> extends Fragment implements BaseMvp<M, V, P> {
-    private P persenter;
+    protected P persenter;
 
     @Override
     public void onAttach(Context context) {

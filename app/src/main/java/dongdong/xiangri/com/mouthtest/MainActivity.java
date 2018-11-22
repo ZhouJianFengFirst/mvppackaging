@@ -1,44 +1,37 @@
 package dongdong.xiangri.com.mouthtest;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
-import dongdong.xiangri.com.mouthtest.base.BaseActivity;
-import dongdong.xiangri.com.mouthtest.mvp.model.MainModel;
-import dongdong.xiangri.com.mouthtest.presenter.MainPresenter;
-import dongdong.xiangri.com.mouthtest.view.MainView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import dongdong.xiangri.com.mouthtest.fragments.HeadFragment;
 
-public class MainActivity extends BaseActivity<MainModel, MainView, MainPresenter> implements MainView {
+public class MainActivity extends AppCompatActivity{
+
+    private FragmentManager manager;
+    private HeadFragment headfragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        presenter.getShopCarNet();
-    }
-    @Override
-    public MainModel createModel() {
-
-        return new MainModel();
-    }
-    @Override
-    public MainView createView() {
-        return this;
+        ButterKnife.bind(this);
+        headfragment = new HeadFragment();
+        manager = getSupportFragmentManager();
+        manager.beginTransaction().add(R.id.fl,headfragment).commit();
     }
 
-    @Override
-    public MainPresenter createPresenter() {
-        return new MainPresenter();
-    }
-
-    @Override
-    public void setShopCarString(String data) {
-        Log.d("Tagger", data + ">>>>");
-    }
-
-    @Override
-    public void showToast(String info) {
-        Toast.makeText(this, info, Toast.LENGTH_SHORT).show();
+    @OnClick({R.id.btn_head,R.id.btn_me})
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.btn_head:
+                manager.beginTransaction().replace(R.id.fl,headfragment).commit();
+                break;
+            case R.id.btn_me:
+                break;
+        }
     }
 }
